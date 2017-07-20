@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="afaa308a637a4b2493713f69e799c862" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="Dev_Frontrush_RailsModel.University" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Dev_Frontrush_RailsModel.Sport" Width="1.5" PointX="10.5" PointY="1.25" />
+        <EntityTypeShape EntityType="Dev_Frontrush_RailsModel.CoachORStaff" Width="1.5" PointX="4.125" PointY="0.875" />
+        <EntityTypeShape EntityType="Dev_Frontrush_RailsModel.CoachORStaffSport" Width="1.5" PointX="8" PointY="1.5" />
+        <AssociationConnector Association="Dev_Frontrush_RailsModel.FK_FRUser_FRUniversity" />
+        <AssociationConnector Association="Dev_Frontrush_RailsModel.FK_FRUserSport_FRUser" />
+        <AssociationConnector Association="Dev_Frontrush_RailsModel.FK_FRUserSport_FRSport" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

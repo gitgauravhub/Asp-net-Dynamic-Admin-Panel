@@ -1,0 +1,407 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Dev_Frontrush_RailsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="Dev_Frontrush_RailsModelStoreContainer">
+          <EntitySet Name="CoachORStaff" EntityType="Dev_Frontrush_RailsModel.Store.CoachORStaff" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CoachORStaffSport" EntityType="Dev_Frontrush_RailsModel.Store.CoachORStaffSport" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Sport" EntityType="Dev_Frontrush_RailsModel.Store.Sport" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="University" EntityType="Dev_Frontrush_RailsModel.Store.University" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_FRUser_FRUniversity" Association="Dev_Frontrush_RailsModel.Store.FK_FRUser_FRUniversity">
+            <End Role="University" EntitySet="University" />
+            <End Role="CoachORStaff" EntitySet="CoachORStaff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FRUserSport_FRSport" Association="Dev_Frontrush_RailsModel.Store.FK_FRUserSport_FRSport">
+            <End Role="Sport" EntitySet="Sport" />
+            <End Role="CoachORStaffSport" EntitySet="CoachORStaffSport" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FRUserSport_FRUser" Association="Dev_Frontrush_RailsModel.Store.FK_FRUserSport_FRUser">
+            <End Role="CoachORStaff" EntitySet="CoachORStaff" />
+            <End Role="CoachORStaffSport" EntitySet="CoachORStaffSport" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CoachORStaff">
+          <Key>
+            <PropertyRef Name="CoachORStaffID" />
+          </Key>
+          <Property Name="CoachORStaffID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UniversityID" Type="bigint" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Username" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Password" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+          <Property Name="PhoneNo" Type="varchar" MaxLength="20" />
+          <Property Name="CellPhoneNo" Type="varchar" MaxLength="20" />
+          <Property Name="Address1" Type="varchar" MaxLength="500" />
+          <Property Name="Address2" Type="varchar" MaxLength="250" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="Zip" Type="varchar" MaxLength="20" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ChangeDate" Type="datetime" />
+          <Property Name="IsEmailQuestionnaire" Type="bit" />
+          <Property Name="ISAllowMultipleExport" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="UALogin" Type="varchar" MaxLength="50" />
+          <Property Name="UAPassword" Type="varchar" MaxLength="50" />
+          <Property Name="IsComplianceOfficer" Type="bit" />
+          <Property Name="IsSmsReplyOnCellPhone" Type="bit" />
+          <Property Name="IsDynApprovedSender" Type="bit" />
+          <Property Name="IsCalBdayActive" Type="bit" Nullable="false" />
+          <Property Name="Photo" Type="varchar" MaxLength="50" />
+          <Property Name="IsAdmissionUser" Type="int" />
+          <Property Name="TwilioPhoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="LoginAttempts" Type="bigint" Nullable="false" />
+          <Property Name="LoginAttemptDate" Type="datetime" />
+          <Property Name="IsMessengerUser" Type="tinyint" Nullable="false" />
+          <Property Name="IsAthleticDirector" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CoachORStaffSport">
+          <Key>
+            <PropertyRef Name="CoachSportID" />
+          </Key>
+          <Property Name="CoachSportID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CoachORStaffID" Type="bigint" Nullable="false" />
+          <Property Name="SportID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sport">
+          <Key>
+            <PropertyRef Name="SportID" />
+          </Key>
+          <Property Name="SportID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UniversityID" Type="bigint" Nullable="false" />
+          <Property Name="SportName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ChangeDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsUAActive" Type="bit" />
+          <Property Name="RuleGroupID" Type="bigint" />
+          <Property Name="CompliancePeriodID" Type="bigint" />
+          <Property Name="IsFootball" Type="bit" Nullable="false" />
+          <Property Name="Organization" Type="varchar" MaxLength="100" />
+          <Property Name="Division" Type="varchar" MaxLength="100" />
+          <Property Name="IsRSAllowed" Type="bit" />
+        </EntityType>
+        <EntityType Name="University">
+          <Key>
+            <PropertyRef Name="UniversityID" />
+          </Key>
+          <Property Name="UniversityID" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UniversityName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="UniversityURL" Type="varchar" MaxLength="200" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="ChangeDate" Type="datetime" />
+          <Property Name="Title" Type="varchar" MaxLength="50" />
+          <Property Name="UniversityLogo" Type="varchar" MaxLength="50" />
+          <Property Name="UniversityLink" Type="varchar" MaxLength="200" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="UniversityKey" Type="varchar" MaxLength="60" />
+          <Property Name="IsAdmission" Type="bit" />
+          <Property Name="UniversityFullName" Type="varchar" MaxLength="100" />
+          <Property Name="State" Type="varchar" MaxLength="100" />
+          <Property Name="DKIM" Type="bit" />
+          <Property Name="IpedID" Type="bigint" />
+        </EntityType>
+        <Association Name="FK_FRUser_FRUniversity">
+          <End Role="University" Type="Dev_Frontrush_RailsModel.Store.University" Multiplicity="1" />
+          <End Role="CoachORStaff" Type="Dev_Frontrush_RailsModel.Store.CoachORStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="University">
+              <PropertyRef Name="UniversityID" />
+            </Principal>
+            <Dependent Role="CoachORStaff">
+              <PropertyRef Name="UniversityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FRUserSport_FRSport">
+          <End Role="Sport" Type="Dev_Frontrush_RailsModel.Store.Sport" Multiplicity="1" />
+          <End Role="CoachORStaffSport" Type="Dev_Frontrush_RailsModel.Store.CoachORStaffSport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sport">
+              <PropertyRef Name="SportID" />
+            </Principal>
+            <Dependent Role="CoachORStaffSport">
+              <PropertyRef Name="SportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FRUserSport_FRUser">
+          <End Role="CoachORStaff" Type="Dev_Frontrush_RailsModel.Store.CoachORStaff" Multiplicity="1" />
+          <End Role="CoachORStaffSport" Type="Dev_Frontrush_RailsModel.Store.CoachORStaffSport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoachORStaff">
+              <PropertyRef Name="CoachORStaffID" />
+            </Principal>
+            <Dependent Role="CoachORStaffSport">
+              <PropertyRef Name="CoachORStaffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Dev_Frontrush_RailsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="Dev_Frontrush_RailsEntities6" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Universities" EntityType="Dev_Frontrush_RailsModel.University" />
+          <EntitySet Name="Sports" EntityType="Dev_Frontrush_RailsModel.Sport" />
+          <EntitySet Name="CoachORStaffs" EntityType="Dev_Frontrush_RailsModel.CoachORStaff" />
+          <EntitySet Name="CoachORStaffSports" EntityType="Dev_Frontrush_RailsModel.CoachORStaffSport" />
+          <AssociationSet Name="FK_FRUser_FRUniversity" Association="Dev_Frontrush_RailsModel.FK_FRUser_FRUniversity">
+            <End Role="University" EntitySet="Universities" />
+            <End Role="CoachORStaff" EntitySet="CoachORStaffs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FRUserSport_FRUser" Association="Dev_Frontrush_RailsModel.FK_FRUserSport_FRUser">
+            <End Role="CoachORStaff" EntitySet="CoachORStaffs" />
+            <End Role="CoachORStaffSport" EntitySet="CoachORStaffSports" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FRUserSport_FRSport" Association="Dev_Frontrush_RailsModel.FK_FRUserSport_FRSport">
+            <End Role="Sport" EntitySet="Sports" />
+            <End Role="CoachORStaffSport" EntitySet="CoachORStaffSports" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="University">
+          <Key>
+            <PropertyRef Name="UniversityID" />
+          </Key>
+          <Property Name="UniversityID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UniversityName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="UniversityURL" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="ChangeDate" Type="DateTime" Precision="3" />
+          <Property Name="Title" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="UniversityLogo" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="UniversityLink" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="UniversityKey" Type="String" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="IsAdmission" Type="Boolean" />
+          <Property Name="UniversityFullName" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="State" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="DKIM" Type="Boolean" />
+          <Property Name="IpedID" Type="Int64" />
+          <NavigationProperty Name="CoachORStaffs" Relationship="Dev_Frontrush_RailsModel.FK_FRUser_FRUniversity" FromRole="University" ToRole="CoachORStaff" />
+        </EntityType>
+        <EntityType Name="Sport">
+          <Key>
+            <PropertyRef Name="SportID" />
+          </Key>
+          <Property Type="Int64" Name="SportID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="UniversityID" Nullable="false" />
+          <Property Type="String" Name="SportName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateDate" Precision="3" />
+          <Property Type="DateTime" Name="ChangeDate" Precision="3" />
+          <Property Type="Boolean" Name="IsActive" />
+          <Property Type="Boolean" Name="IsUAActive" />
+          <Property Type="Int64" Name="RuleGroupID" />
+          <Property Type="Int64" Name="CompliancePeriodID" />
+          <Property Type="Boolean" Name="IsFootball" Nullable="false" />
+          <Property Type="String" Name="Organization" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Division" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsRSAllowed" />
+          <NavigationProperty Name="CoachORStaffSports" Relationship="Dev_Frontrush_RailsModel.FK_FRUserSport_FRSport" FromRole="Sport" ToRole="CoachORStaffSport" />
+        </EntityType>
+        <EntityType Name="CoachORStaff">
+          <Key>
+            <PropertyRef Name="CoachORStaffID" />
+          </Key>
+          <Property Type="Int64" Name="CoachORStaffID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="UniversityID" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EmailAddress" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="PhoneNo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="CellPhoneNo" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Address1" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Address2" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="State" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="City" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Zip" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreateDate" Precision="3" />
+          <Property Type="DateTime" Name="ChangeDate" Precision="3" />
+          <Property Type="Boolean" Name="IsEmailQuestionnaire" />
+          <Property Type="Boolean" Name="ISAllowMultipleExport" />
+          <Property Type="Boolean" Name="IsActive" />
+          <Property Type="String" Name="UALogin" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="UAPassword" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsComplianceOfficer" />
+          <Property Type="Boolean" Name="IsSmsReplyOnCellPhone" />
+          <Property Type="Boolean" Name="IsDynApprovedSender" />
+          <Property Type="Boolean" Name="IsCalBdayActive" Nullable="false" />
+          <Property Type="String" Name="Photo" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Int32" Name="IsAdmissionUser" />
+          <Property Type="String" Name="TwilioPhoneNumber" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Type="Int64" Name="LoginAttempts" Nullable="false" />
+          <Property Type="DateTime" Name="LoginAttemptDate" Precision="3" />
+          <Property Type="Byte" Name="IsMessengerUser" Nullable="false" />
+          <Property Type="Byte" Name="IsAthleticDirector" Nullable="false" />
+          <NavigationProperty Name="University" Relationship="Dev_Frontrush_RailsModel.FK_FRUser_FRUniversity" FromRole="CoachORStaff" ToRole="University" />
+          <NavigationProperty Name="CoachORStaffSports" Relationship="Dev_Frontrush_RailsModel.FK_FRUserSport_FRUser" FromRole="CoachORStaff" ToRole="CoachORStaffSport" />
+        </EntityType>
+        <EntityType Name="CoachORStaffSport">
+          <Key>
+            <PropertyRef Name="CoachSportID" />
+          </Key>
+          <Property Type="Int64" Name="CoachSportID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="CoachORStaffID" Nullable="false" />
+          <Property Type="Int64" Name="SportID" Nullable="false" />
+          <NavigationProperty Name="CoachORStaff" Relationship="Dev_Frontrush_RailsModel.FK_FRUserSport_FRUser" FromRole="CoachORStaffSport" ToRole="CoachORStaff" />
+          <NavigationProperty Name="Sport" Relationship="Dev_Frontrush_RailsModel.FK_FRUserSport_FRSport" FromRole="CoachORStaffSport" ToRole="Sport" />
+        </EntityType>
+        <Association Name="FK_FRUser_FRUniversity">
+          <End Type="Dev_Frontrush_RailsModel.University" Role="University" Multiplicity="1" />
+          <End Type="Dev_Frontrush_RailsModel.CoachORStaff" Role="CoachORStaff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="University">
+              <PropertyRef Name="UniversityID" />
+            </Principal>
+            <Dependent Role="CoachORStaff">
+              <PropertyRef Name="UniversityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FRUserSport_FRUser">
+          <End Type="Dev_Frontrush_RailsModel.CoachORStaff" Role="CoachORStaff" Multiplicity="1" />
+          <End Type="Dev_Frontrush_RailsModel.CoachORStaffSport" Role="CoachORStaffSport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CoachORStaff">
+              <PropertyRef Name="CoachORStaffID" />
+            </Principal>
+            <Dependent Role="CoachORStaffSport">
+              <PropertyRef Name="CoachORStaffID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FRUserSport_FRSport">
+          <End Type="Dev_Frontrush_RailsModel.Sport" Role="Sport" Multiplicity="1" />
+          <End Type="Dev_Frontrush_RailsModel.CoachORStaffSport" Role="CoachORStaffSport" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sport">
+              <PropertyRef Name="SportID" />
+            </Principal>
+            <Dependent Role="CoachORStaffSport">
+              <PropertyRef Name="SportID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Dev_Frontrush_RailsModelStoreContainer" CdmEntityContainer="Dev_Frontrush_RailsEntities6">
+          <EntitySetMapping Name="Universities">
+            <EntityTypeMapping TypeName="Dev_Frontrush_RailsModel.University">
+              <MappingFragment StoreEntitySet="University">
+                <ScalarProperty Name="UniversityID" ColumnName="UniversityID" />
+                <ScalarProperty Name="UniversityName" ColumnName="UniversityName" />
+                <ScalarProperty Name="UniversityURL" ColumnName="UniversityURL" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="UniversityLogo" ColumnName="UniversityLogo" />
+                <ScalarProperty Name="UniversityLink" ColumnName="UniversityLink" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="UniversityKey" ColumnName="UniversityKey" />
+                <ScalarProperty Name="IsAdmission" ColumnName="IsAdmission" />
+                <ScalarProperty Name="UniversityFullName" ColumnName="UniversityFullName" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="DKIM" ColumnName="DKIM" />
+                <ScalarProperty Name="IpedID" ColumnName="IpedID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sports">
+            <EntityTypeMapping TypeName="Dev_Frontrush_RailsModel.Sport">
+              <MappingFragment StoreEntitySet="Sport">
+                <ScalarProperty Name="IsRSAllowed" ColumnName="IsRSAllowed" />
+                <ScalarProperty Name="Division" ColumnName="Division" />
+                <ScalarProperty Name="Organization" ColumnName="Organization" />
+                <ScalarProperty Name="IsFootball" ColumnName="IsFootball" />
+                <ScalarProperty Name="CompliancePeriodID" ColumnName="CompliancePeriodID" />
+                <ScalarProperty Name="RuleGroupID" ColumnName="RuleGroupID" />
+                <ScalarProperty Name="IsUAActive" ColumnName="IsUAActive" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="SportName" ColumnName="SportName" />
+                <ScalarProperty Name="UniversityID" ColumnName="UniversityID" />
+                <ScalarProperty Name="SportID" ColumnName="SportID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoachORStaffs">
+            <EntityTypeMapping TypeName="Dev_Frontrush_RailsModel.CoachORStaff">
+              <MappingFragment StoreEntitySet="CoachORStaff">
+                <ScalarProperty Name="IsAthleticDirector" ColumnName="IsAthleticDirector" />
+                <ScalarProperty Name="IsMessengerUser" ColumnName="IsMessengerUser" />
+                <ScalarProperty Name="LoginAttemptDate" ColumnName="LoginAttemptDate" />
+                <ScalarProperty Name="LoginAttempts" ColumnName="LoginAttempts" />
+                <ScalarProperty Name="TwilioPhoneNumber" ColumnName="TwilioPhoneNumber" />
+                <ScalarProperty Name="IsAdmissionUser" ColumnName="IsAdmissionUser" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="IsCalBdayActive" ColumnName="IsCalBdayActive" />
+                <ScalarProperty Name="IsDynApprovedSender" ColumnName="IsDynApprovedSender" />
+                <ScalarProperty Name="IsSmsReplyOnCellPhone" ColumnName="IsSmsReplyOnCellPhone" />
+                <ScalarProperty Name="IsComplianceOfficer" ColumnName="IsComplianceOfficer" />
+                <ScalarProperty Name="UAPassword" ColumnName="UAPassword" />
+                <ScalarProperty Name="UALogin" ColumnName="UALogin" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ISAllowMultipleExport" ColumnName="ISAllowMultipleExport" />
+                <ScalarProperty Name="IsEmailQuestionnaire" ColumnName="IsEmailQuestionnaire" />
+                <ScalarProperty Name="ChangeDate" ColumnName="ChangeDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="CellPhoneNo" ColumnName="CellPhoneNo" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UniversityID" ColumnName="UniversityID" />
+                <ScalarProperty Name="CoachORStaffID" ColumnName="CoachORStaffID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CoachORStaffSports">
+            <EntityTypeMapping TypeName="Dev_Frontrush_RailsModel.CoachORStaffSport">
+              <MappingFragment StoreEntitySet="CoachORStaffSport">
+                <ScalarProperty Name="SportID" ColumnName="SportID" />
+                <ScalarProperty Name="CoachORStaffID" ColumnName="CoachORStaffID" />
+                <ScalarProperty Name="CoachSportID" ColumnName="CoachSportID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
